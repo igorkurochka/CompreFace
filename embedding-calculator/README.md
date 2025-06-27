@@ -97,6 +97,8 @@ Pass to `EXTRA_PLUGINS` comma-separated names of plugins.
 |------------------------------------|----------------|-------------|------------|-------------|
 | agegender.AgeDetector              | age            | agegender   | Tensorflow |             |
 | agegender.GenderDetector           | gender         | agegender   | Tensorflow |             |
+| facialattributes.EmotionDetector   | emotion        | facialattributes | Tensorflow |             |
+| facialattributes.RaceDetector      | race           | facialattributes | Tensorflow |             |
 | insightface.AgeDetector            | age            | insightface | MXNet      | +           |
 | insightface.GenderDetector         | gender         | insightface | MXNet      | +           |
 | facenet.LandmarksDetector          | landmarks      | Facenet     | Tensorflow | +           |

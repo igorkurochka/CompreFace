@@ -475,6 +475,8 @@ Response body on success:
 |----------------------------|---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | age                        | object  | detected age range. Return only if [age plugin](Face-services-and-plugins.md#face-plugins) is enabled                                                       |
 | gender                     | object  | detected gender. Return only if [gender plugin](Face-services-and-plugins.md#face-plugins) is enabled                                                       |
+| emotion                    | object  | detected emotion. Return only if [emotion plugin](Face-services-and-plugins.md#face-plugins) is enabled
+| race                       | object  | detected race. Return only if [race plugin](Face-services-and-plugins.md#face-plugins) is enabled
 | pose                       | object  | detected head pose. Return only if [pose plugin](Face-services-and-plugins.md#face-plugins) is enabled                                                      |
 | mask                       | object  | detected mask. Return only if [face mask plugin](Face-services-and-plugins.md#face-plugins) is enabled.                                                     |
 | embedding                  | array   | face embeddings. Return only if [calculator plugin](Face-services-and-plugins.md#face-plugins) is enabled                                                   |
@@ -562,6 +564,8 @@ Response body on success:
 |----------------------------|---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | age                        | object  | detected age range. Return only if [age plugin](Face-services-and-plugins.md#face-plugins) is enabled                                                       |
 | gender                     | object  | detected gender. Return only if [gender plugin](Face-services-and-plugins.md#face-plugins) is enabled                                                       |
+| emotion                    | object  | detected emotion. Return only if [emotion plugin](Face-services-and-plugins.md#face-plugins) is enabled
+| race                       | object  | detected race. Return only if [race plugin](Face-services-and-plugins.md#face-plugins) is enabled
 | pose                       | object  | detected head pose. Return only if [pose plugin](Face-services-and-plugins.md#face-plugins) is enabled                                                      |
 | mask                       | object  | detected mask. Return only if [face mask plugin](Face-services-and-plugins.md#face-plugins) is enabled                                                      |
 | embedding                  | array   | face embeddings. Return only if [calculator plugin](Face-services-and-plugins.md#face-plugins) is enabled                                                   |
@@ -643,6 +647,8 @@ Response body on success:
 |----------------------------|---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | age                        | object  | detected age range. Return only if [age plugin](Face-services-and-plugins.md#face-plugins) is enabled                                                       |
 | gender                     | object  | detected gender. Return only if [gender plugin](Face-services-and-plugins.md#face-plugins) is enabled                                                       |
+| emotion                    | object  | detected emotion. Return only if [emotion plugin](Face-services-and-plugins.md#face-plugins) is enabled
+| race                       | object  | detected race. Return only if [race plugin](Face-services-and-plugins.md#face-plugins) is enabled
 | pose                       | object  | detected head pose. Return only if [pose plugin](Face-services-and-plugins.md#face-plugins) is enabled                                                      |
 | mask                       | object  | detected mask. Return only if [face mask plugin](Face-services-and-plugins.md#face-plugins) is enabled                                                      |
 | embedding                  | array   | face embeddings. Return only if [calculator plugin](Face-services-and-plugins.md#face-plugins) is enabled                                                   |
@@ -762,6 +768,8 @@ Response body on success:
 | face_matches               | array   | result of face verification                                                                                                                                 |
 | age                        | object  | detected age range. Return only if [age plugin](Face-services-and-plugins.md#face-plugins) is enabled                                                       |
 | gender                     | object  | detected gender. Return only if [gender plugin](Face-services-and-plugins.md#face-plugins) is enabled                                                       |
+| emotion                    | object  | detected emotion. Return only if [emotion plugin](Face-services-and-plugins.md#face-plugins) is enabled
+| race                       | object  | detected race. Return only if [race plugin](Face-services-and-plugins.md#face-plugins) is enabled
 | pose                       | object  | detected head pose. Return only if [pose plugin](Face-services-and-plugins.md#face-plugins) is enabled                                                      |
 | mask                       | object  | detected mask. Return only if [face mask plugin](Face-services-and-plugins.md#face-plugins) is enabled                                                      |
 | embedding                  | array   | face embeddings. Return only if [calculator plugin](Face-services-and-plugins.md#face-plugins) is enabled                                                   |
