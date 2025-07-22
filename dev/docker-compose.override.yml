@@ -1,0 +1,8 @@
+services:
+  compreface-core:
+    build:
+      args:
+        # use InsightFace calculator instead of FaceNet
+        CALCULATION_PLUGIN: insightface.Calculator@arcface-r100-msfdrop75
+        FACE_DETECTION_PLUGIN: insightface.FaceDetector@retinaface_r50_v1
+        EXTRA_PLUGINS="insightface.LandmarksDetector,persons.PersonDetector,facialattributes.EmotionDetector,facialattributes.RaceDetector,agegender.AgeDetector,agegender.GenderDetector,insightface.PoseEstimator"
