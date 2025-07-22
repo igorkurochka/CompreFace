@@ -6,6 +6,8 @@ CompreFace supports these face services and plugins:
 * Face verification service
 * Age detection plugin
 * Gender detection plugin
+* Emotion detection plugin
+* Race detection plugin
 * Landmarks detection plugin
 * Calculator plugin
 * Face mask detection plugin
@@ -132,6 +134,8 @@ This request will recognize faces on the image and return additional information
 The list of possible plugins:
 * age - returns the supposed range of a person’s age in format [min, max]
 * gender - returns the supposed person’s gender
+* emotion - returns the dominant emotion with probability
+* race - returns the dominant race with probability
 * landmarks - returns face landmarks. This plugin is supported by all configurations and returns 5 points of eyes, nose, and mouth
 * calculator - returns face embeddings.  
 * pose - returns head pose in format: `{"pitch": 0.0,"roll": 0.0,"yaw": 0.0}`

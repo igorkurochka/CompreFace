@@ -27,6 +27,22 @@ class AgeDTO(JSONEncodable):
             'probability': float(age_probability)}
 
 
+class EmotionDTO(JSONEncodable):
+    def __init__(self, emotion, emotion_probability=1.):
+        self.emotion = {
+            'value': emotion,
+            'probability': float(emotion_probability)
+        }
+
+
+class RaceDTO(JSONEncodable):
+    def __init__(self, race, race_probability=1.):
+        self.race = {
+            'value': race,
+            'probability': float(race_probability)
+        }
+
+
 class MaskDTO(JSONEncodable):
     def __init__(self, mask, mask_probability=1.):
         self.mask = {
