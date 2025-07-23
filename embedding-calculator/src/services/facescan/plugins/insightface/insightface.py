@@ -66,6 +66,7 @@ class FaceDetector(InsightFaceMixin, mixins.FaceDetectorMixin, base.BasePlugin):
         ('retinaface_mnet025_v1', '1ggNFFqpe0abWz6V1A82rnxD6fyxB8W2c'),
         ('retinaface_mnet025_v2', '1EYTMxgcNdlvoL1fSC8N1zkaWrX75ZoNL'),
         ('retinaface_r50_v1', '1LZ5h9f_YC5EdbIZAqVba9TKHipi90JBj'),
+        ('scrfd_10g_bnkps', '1Ty2shT3Y2dZ7f1K_yclvmE-Z_H3dM-lk'),
     )
     call_counter = 0
     MAX_CALL_COUNTER = 1000
@@ -141,6 +142,7 @@ class Calculator(InsightFaceMixin, mixins.CalculatorMixin, base.BasePlugin):
         ('arcface-r100-msfdrop75', '1lAnFcBXoMKqE-SkZKTmi6MsYAmzG0tFw', (1.224676, 6.322647217), 400),
         # CASIA-WebFace-Masked, 0.9840 LFW, 0.9667 LFW-Masked (orig mobilefacenet has 0.9482 on LFW-Masked)
         ('arcface_mobilefacenet_casia_masked', '1ltcJChTdP1yQWF9e1ESpTNYAVwxLSNLP', (1.22507105, 7.321198934), 200),
+        ('buffalo_l_1k3d68', '1rDg-2CjJVqR27kpy9mHKJ2-GjlfpKh0s', (1.224676, 6.322647217), 400),
     )
 
     def calc_embedding(self, face_img: Array3D) -> Array3D:
