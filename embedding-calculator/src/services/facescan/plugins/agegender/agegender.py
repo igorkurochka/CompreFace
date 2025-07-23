@@ -55,7 +55,7 @@ class BaseAgeGender(base.BasePlugin):
 
 
 class AgeDetector(BaseAgeGender):
-    slug = 'age'
+    slug = 'facenet_age'
     LABELS = ((0, 2), (4, 6), (8, 12), (15, 20), (25, 32), (38, 43), (48, 53), (60, 100))
     ml_models = (
         ('22801', '1PxK72O-NROEz8pUGDDFRDYF4AABbvWiC'),
@@ -67,7 +67,7 @@ class AgeDetector(BaseAgeGender):
 
 
 class GenderDetector(BaseAgeGender):
-    slug = 'gender'
+    slug = 'facenet_gender'
     LABELS = ('male', 'female')
     ml_models = (
         ('21936', '1j9B76U3b4_F9e8-OKlNdOBQKa2ziGe_-'),

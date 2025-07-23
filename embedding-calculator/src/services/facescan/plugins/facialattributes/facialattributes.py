@@ -4,9 +4,9 @@ from src.services.dto import plugin_result
 
 
 class BaseFacialAttributes(base.BasePlugin):
-    """Common functionality for emotion and race detectors."""
+    """Common functionality for emotion, race, age, and gender detectors."""
     CACHE_FIELD = '_facial_attributes_cache'
-    ACTIONS = ['emotion', 'race']
+    ACTIONS = ['emotion', 'race', 'age', 'gender']
 
     def _analyze(self, face: plugin_result.FaceDTO):
         result = getattr(face, self.CACHE_FIELD, None)
@@ -34,3 +34,25 @@ class RaceDetector(BaseFacialAttributes):
         race = analysis.get('dominant_race')
         probability = analysis.get('race', {}).get(race, 0) / 100.0 if race else 0.0
         return plugin_result.RaceDTO(race=race, race_probability=probability)
+
+
+class AgeDetector(BaseFacialAttributes):
+    slug = 'age'
+
+    def __call__(self, face: plugin_result.FaceDTO) -> plugin_result.AgeDTO:
+        analysis = self._analyze(face)
+        age = analysis.get('age')
+        # DeepFace returns age as a single number, convert to tuple format
+        age_tuple = (age, age) if age is not None else (0, 0)
+        probability = 1.0  # DeepFace doesn't provide age probability, default to 1.0
+        return plugin_result.AgeDTO(age=age_tuple, age_probability=probability)
+
+
+class GenderDetector(BaseFacialAttributes):
+    slug = 'gender'
+
+    def __call__(self, face: plugin_result.FaceDTO) -> plugin_result.GenderDTO:
+        analysis = self._analyze(face)
+        gender = analysis.get('dominant_gender')
+        probability = analysis.get('gender', {}).get(gender, 0) / 100.0 if gender else 0.0
+        return plugin_result.GenderDTO(gender=gender, gender_probability=probability)
