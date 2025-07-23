@@ -19,13 +19,10 @@ class PersonDetector(base.BasePlugin):
 
     slug = "persons"
     
-    def __init__(self, ml_model_name: str | None = None) -> None:
-        super().__init__(ml_model_name)
-        self._model = None
 
     def init_model(self, model_path: str | None = None) -> None:
         """Load YOLOv8 model if not yet loaded."""
-        if self._model is None:
+        if not hasattr(self, "_model") or self._model is None:
             path = model_path or "yolov8n.pt"  # default pretrained weights
             if YOLO is None:
                 raise ImportError("ultralytics package is required for PersonDetector")
@@ -45,7 +42,7 @@ class PersonDetector(base.BasePlugin):
 
     def __call__(self, image: Union[str, Path, np.ndarray]) -> List[Tuple[int, int, int, int, float]]:
         """Detect persons in an image and return bounding boxes."""
-        if self._model is None:
+        if not hasattr(self, "_model") or self._model is None:
             self.init_model()
 
         img = self._prepare_image(image)
