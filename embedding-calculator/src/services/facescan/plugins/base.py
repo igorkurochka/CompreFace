@@ -122,7 +122,7 @@ class BasePlugin(ABC):
     def ml_model(self) -> Optional[MLModel]:
         if hasattr(self, 'ml_models'):
             for ml_model_args in self.ml_models:
-                if not self.ml_model_name or self.ml_model_name == ml_model_args[0]:
+                if not self.ml or self.ml_model_name == ml_model_args[0]:
                     return self.create_ml_model(*ml_model_args)
 
     @property

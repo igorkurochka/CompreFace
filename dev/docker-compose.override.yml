@@ -3,7 +3,10 @@ services:
     build:
       args:
         # use InsightFace calculator instead of FaceNet
-        CALCULATION_PLUGIN: insightface.Calculator@scrfd_10g_bnkps # 1Ty2shT3Y2dZ7f1K_yclvmE-Z_H3dM-lk
-        FACE_DETECTION_PLUGIN: insightface.FaceDetector@buffalo_l_1k3d68 # 1rDg-2CjJVqR27kpy9mHKJ2-GjlfpKh0s
-        EXTRA_PLUGINS: "insightface.LandmarksDetector,persons.PersonDetector,facialattributes.EmotionDetector,facialattributes.RaceDetector,facialattributes.AgeDetector,facialattributes.GenderDetector,insightface.PoseEstimator"
+        # CALCULATION_PLUGIN: insightface.Calculator@scrfd_10g_bnkps # 1Ty2shT3Y2dZ7f1K_yclvmE-Z_H3dM-lk
+        # FACE_DETECTION_PLUGIN: insightface.FaceDetector@buffalo_l_1k3d68 # 1rDg-2CjJVqR27kpy9mHKJ2-GjlfpKh0s
+        # EXTRA_PLUGINS: "insightface.LandmarksDetector,persons.PersonDetector,facialattributes.EmotionDetector,facialattributes.RaceDetector,facialattributes.AgeDetector,facialattributes.GenderDetector,insightface.PoseEstimator"
+        CALCULATION_PLUGIN: yolo.Calculator@yolov8_embedding
+        FACE_DETECTION_PLUGIN: yolo.FaceDetector@yolov8_embedding
+        EXTRA_PLUGINS: "yolo.LandmarksDetector,yolo.PersonDetector,yolo.EmotionDetector,yolo.RaceDetector,yolo.AgeDetector,yolo.GenderDetector,yolo.PoseEstimator"
         SKIP_TESTS: "true"

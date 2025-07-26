@@ -25,12 +25,13 @@ except Exception:  # pragma: no cover - ultralytics may not be installed during 
 class YOLOMixin:
     """Utility mixin to lazily load YOLO models."""
 
-    _model_name: str = "yolov8n.pt"
+    ml_models = (("yolov8_embedding", "1veM5STtKx5x1PgfjWitS_dMrbdYFIeoV", (1.0, 1.0), 0.6),)
 
     def _get_model_path(self) -> str:
         if self.ml_model:
             return str(self.ml_model.path)
-        return self._model_name
+        else:
+            raise ValueError("ml_model_name is required for YOLO plugin")
 
     @cached_property
     def _model(self):
@@ -78,7 +79,6 @@ class FaceDetector(YOLOMixin, mixins.FaceDetectorMixin, base.BasePlugin):
 class Calculator(mixins.CalculatorMixin, base.BasePlugin):
     """Simple embedding calculator using resized grayscale pixels."""
 
-    ml_models = (("yolov8_embedding", "", (1.0, 1.0), 0.6),)
     IMAGE_SIZE = 112
 
     def calc_embedding(self, face_img: Array3D) -> Array3D:
