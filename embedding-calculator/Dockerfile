@@ -39,8 +39,8 @@ RUN git clone --depth=1 -b 0.5.5 https://github.com/LLNL/zfp && \
 # install common python packages
 SHELL ["/bin/bash", "-c"]
 WORKDIR /app/ml
-COPY requirements.txt .
 RUN pip install --upgrade pip
+COPY requirements.txt .
 
 # Ensure numpy is installed first as imagecodecs doesn't declare dependencies correctly until 2022.9.26,
 # which is not compatible with Python 3.7
