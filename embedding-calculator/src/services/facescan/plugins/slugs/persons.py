@@ -1,13 +1,12 @@
-"""YOLOv8 based person detection plugin for CompreFace."""
+"""Expose PersonDetector slug from YOLO plugin."""
 
 from __future__ import annotations
 
-import numpy as np
 from typing import List, Tuple, Union
 from pathlib import Path
+import numpy as np
 
 from ..yolo.yolo import PersonDetector
-
 
 _detector: PersonDetector | None = None
 
