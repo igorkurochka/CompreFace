@@ -89,7 +89,7 @@ pylama==8.4.1
 Pillow==8.3.2
 imagecodecs==2020.5.30
 numpy==1.23.5
-scipy==1.7.0
+scipy==1.10.1
 opencv-python==4.6.0.66
 scikit-image==0.17.2
 scikit-learn==0.23.2
