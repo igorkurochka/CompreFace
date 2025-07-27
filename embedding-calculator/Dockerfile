@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y build-essential cmake git wget unzip \
         libpng-dev libtiff-dev libavformat-dev libpq-dev libfreeimage3 python3-opencv \
         libaec-dev libblosc-dev libbrotli-dev libbz2-dev libgif-dev libopenjp2-7-dev \
         liblcms2-dev libcharls-dev libjxr-dev liblz4-dev libcfitsio-dev libpcre3 libpcre3-dev \
-	libsnappy-dev libwebp-dev libzopfli-dev libzstd-dev libheif-dev libzfp-dev \
+	libsnappy-dev libwebp-dev libzopfli-dev libzstd-dev libheif-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Dependencies for imagecodecs
@@ -27,7 +27,7 @@ RUN git clone --depth=1 --shallow-submodules --recursive -b v0.7.0 https://githu
 	rm -rf /tmp/libjxl
 
 # zfp
-RUN git clone --depth=1 -b 0.5.5 https://github.com/LLNL/zfp && \
+RUN git clone --depth=1 -b 1.0.0 https://github.com/LLNL/zfp && \
 	cd zfp && \
 	mkdir build && \
 	cd build && \

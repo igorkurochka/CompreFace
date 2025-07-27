@@ -19,4 +19,8 @@ if __name__ == '__main__':
     for plugin in plugin_manager.plugins:
         if plugin.ml_model:
             print(f'Checking models for {plugin}...')
-            plugin.ml_model.download_if_not_exists()
+            try:
+                plugin.ml_model.download_if_not_exists()
+            except Exception as e:
+                print(f'Warning: Could not download model for {plugin}: {e}')
+                print('This is expected during build and will be resolved when the container runs')

@@ -19,8 +19,6 @@ import sys
 import traceback
 import warnings
 
-from yaml import YAMLLoadWarning
-
 from src.constants import ENV
 from src.services.flask_.logging_context import FlaskRequestContextAdder, request_dict_to_str
 
@@ -67,7 +65,6 @@ class JSONFormatter(logging.Filter):
 def _set_logging_levels():
     logging.getLogger('PIL').setLevel(logging.INFO)
     logging.getLogger('werkzeug').setLevel(logging.ERROR)
-    warnings.filterwarnings("ignore", category=YAMLLoadWarning)
     os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
     os.environ['MXNET_SUBGRAPH_VERBOSE'] = '0'
 

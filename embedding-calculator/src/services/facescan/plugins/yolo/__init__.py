@@ -1,3 +1,3 @@
 """YOLOv8 based face scan plugin."""
 
-requirements = ('ultralytics>=8.0.0',)
+requirements = ('typing-extensions==4.5.0', 'ultralytics>=8.0.0',)
