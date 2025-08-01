@@ -224,10 +224,16 @@ class PersonDetector(YOLOMixin, base.BasePlugin):
             raise TypeError("image must be file path or numpy array")
         return img
 
-    def __call__(self, image: np.ndarray | str | Path) -> List[tuple[int, int, int, int, float]]:
+    def __call__(self, image: np.ndarray | str | Path | plugin_result.FaceDTO) -> List[tuple[int, int, int, int, float]]:
         # During build, model might not be available
         if self._model is None:
             print("Warning: YOLO model not available during build")
+            return []
+
+        # Handle case where we receive a FaceDTO (when used as face plugin)
+        if isinstance(image, plugin_result.FaceDTO):
+            # For face plugins, we return empty list since person detection 
+            # should be done on full images, not cropped faces
             return []
 
         img = self._prepare_image(image)
