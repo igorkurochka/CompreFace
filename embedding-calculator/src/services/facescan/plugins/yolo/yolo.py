@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import numpy as np
-from typing import List
+from typing import List, Tuple
 from pathlib import Path
 
 from cached_property import cached_property
@@ -22,27 +22,54 @@ except Exception:  # pragma: no cover - ultralytics may not be installed during 
     YOLO = None
 
 
+class YOLOModel:
+    """Wrapper for YOLO models to provide MLModel-like interface."""
+    
+    def __init__(self, model_name: str = "yolov8n.pt"):
+        self.name = model_name
+        self._model = None
+        self._load_model()
+    
+    def _load_model(self):
+        """Load the YOLO model."""
+        if YOLO is None:
+            raise ImportError("ultralytics package is required for YOLO plugin")
+        try:
+            self._model = YOLO(self.name)
+        except Exception as e:
+            # During build, model download might fail due to network issues
+            # This is expected and will be resolved when the container runs
+            print(f"Warning: Could not load YOLO model during build: {e}")
+            self._model = None
+    
+    @property
+    def similarity_coefficients(self) -> Tuple[float, float]:
+        """Return similarity coefficients for YOLO models."""
+        # YOLO models typically use confidence scores directly
+        # These coefficients can be adjusted based on the specific model
+        return (0.0, 1.0)
+    
+    def __str__(self):
+        return f"YOLOModel({self.name})"
+    
+    def predict(self, img):
+        """Run prediction on the image."""
+        if self._model is None:
+            return None
+        return self._model(img)
+
+
 class YOLOMixin:
     """Utility mixin to lazily load YOLO models."""
 
     _model_name: str = "yolov8n.pt"
 
-    def _get_model_path(self) -> str:
-        if self.ml_model:
-            return str(self.ml_model.path)
-        return self._model_name
-
     @cached_property
     def _model(self):
-        if YOLO is None:
-            raise ImportError("ultralytics package is required for YOLO plugin")
-        try:
-            return YOLO(self._get_model_path())
-        except Exception as e:
-            # During build, model download might fail due to network issues
-            # This is expected and will be resolved when the container runs
-            print(f"Warning: Could not load YOLO model during build: {e}")
-            return None
+        """Get the YOLO model instance."""
+        if self.ml_model and hasattr(self.ml_model, '_model'):
+            return self.ml_model._model
+        return None
 
 
 class FaceDetector(YOLOMixin, mixins.FaceDetectorMixin, base.BasePlugin):
@@ -52,10 +79,10 @@ class FaceDetector(YOLOMixin, mixins.FaceDetectorMixin, base.BasePlugin):
     IMAGE_SIZE = 112
     det_prob_threshold = 0.5
 
-    @property
+    @cached_property
     def ml_model(self):
-        """Override to avoid model download during build."""
-        return None
+        """Return a YOLOModel wrapper for face detection."""
+        return YOLOModel("yolov8n.pt")
 
     def find_faces(self, img: Array3D, det_prob_threshold: float | None = None) -> List[BoundingBoxDTO]:
         if det_prob_threshold is None:
@@ -163,15 +190,15 @@ class EmotionDetector(base.BasePlugin):
         return plugin_result.EmotionDTO(emotion="neutral")
 
 
-class PersonDetector(base.BasePlugin):
+class PersonDetector(YOLOMixin, base.BasePlugin):
     """Detect persons using a YOLOv8 model."""
 
     slug = "persons"
 
-    @property
+    @cached_property
     def ml_model(self):
-        """Override to avoid model download during build."""
-        return None
+        """Return a YOLOModel wrapper for person detection."""
+        return YOLOModel("yolov8n.pt")
 
     def init_model(self, model_path: str | None = None) -> None:
         """Load YOLOv8 model if not already initialized."""
@@ -198,9 +225,6 @@ class PersonDetector(base.BasePlugin):
         return img
 
     def __call__(self, image: np.ndarray | str | Path) -> List[tuple[int, int, int, int, float]]:
-        if not hasattr(self, "_model") or self._model is None:
-            self.init_model()
-
         # During build, model might not be available
         if self._model is None:
             print("Warning: YOLO model not available during build")
