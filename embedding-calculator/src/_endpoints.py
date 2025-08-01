@@ -68,10 +68,13 @@ def endpoints(app):
         available_plugins = {p.slug: str(p)
                              for p in managers.plugin_manager.plugins}
         calculator = managers.plugin_manager.calculator
+        similarity_coefficients = None
+        if calculator.ml_model is not None:
+            similarity_coefficients = calculator.ml_model.similarity_coefficients
         return jsonify(
             status='OK', build_version=ENV.BUILD_VERSION,
             calculator_version=str(calculator),
-            similarity_coefficients=calculator.ml_model.similarity_coefficients,
+            similarity_coefficients=similarity_coefficients,
             available_plugins=available_plugins
         )
 
